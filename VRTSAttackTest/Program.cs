@@ -12,19 +12,23 @@ namespace VRTSAttackTest
             Mech[] Players = new Mech[5];
             Mech[] Enemies = new Mech[5];
 
+            int[,] SignModifier = new int[5, 5]
+            {
+                { 1,1,1,1,1 },
+                { 1,1,1,1,1 },
+                { 1,1,1,1,1 },
+                { 1,1,1,1,1 },
+                { 1,1,1,1,1 }
+            };
 
-            //SetupPlayer(Players, 3);
-            ////        Initialise Enemies
-            //SetupEnemies(Enemies, 5);
-
-
-            //foreach (var player in Players)
-            //{
-            //    foreach (var enemy  in Enemies)
-            //    {
-            //        Console.WriteLine(player.LevelModifier(enemy));
-            //    }
-            //}
+            int[,] LevelModifier = new int[5, 5]
+            {
+                { 1,1,1,1,1 },
+                { 1,1,1,1,1 },
+                { 1,1,1,1,1 },
+                { 1,1,1,1,1 },
+                { 1,1,1,1,1 }
+            };
 
             #region Refactor code
             //DisplayStatus(Players[0], Enemies);
@@ -50,6 +54,8 @@ namespace VRTSAttackTest
             }
             */
             #endregion
+
+
 
             for (int i = 0; i < 5; i++)
             {
@@ -136,7 +142,7 @@ namespace VRTSAttackTest
         }
 
 
-
+        //element may be thought of as 'type' of mech.
         public class Element
         {
             Random rand = new Random(); 
@@ -175,99 +181,63 @@ namespace VRTSAttackTest
             }
 
             /// <summary>
-            ///  //Main method that returns a damage modifier 
+            ///  //Damage based on Sign
+            ///  Main method that returns a damage modifier 
             ///     based on each sign as in 
             ///     Rock, Paper, Scissor, Lizard, Spock
             ///     See emthod spec for full ruleset
             /// </summary>
             public decimal SignModifier(SIGN enemySign)
             {
-                switch (mySign)
+                return mySign switch
                 {
-                    case SIGN.Rock:
-                        //TODO: amend code to dropthrough wins and looses
-                        switch (enemySign)
-                        {
-                            case SIGN.Rock:
-                                return 1.0m; //Draw
-                            case SIGN.Paper:
-                                return 0.75m; //Loose
-                            case SIGN.Scissor:
-                                return 1.25m; //Win
-                            case SIGN.Lizard:
-                                return 1.25m; //Win
-                            case SIGN.Spock:
-                                return 0.75m; //Loose
-                            default:
-                                return 0;
-                        }
-                    case SIGN.Paper:
-                        switch (enemySign)
-                        {
-                            case SIGN.Rock:
-                                return 1.25m; //Win
-                            case SIGN.Paper:
-                                return 1.0m; //Draw
-                            case SIGN.Scissor:
-                                return 0.75m; //Loose
-                            case SIGN.Lizard:
-                                return 0.75m; //Loose
-                            case SIGN.Spock:
-                                return 1.25m; //Draw
-                            default:
-                                return 0;
-                        }
-                    case SIGN.Scissor:
-                        switch (enemySign)
-                        {
-                            case SIGN.Rock:
-                                return 0.75m; //Loose
-                            case SIGN.Paper:
-                                return 1.25m; //Win
-                            case SIGN.Scissor:
-                                return 1.0m; //Draw
-                            case SIGN.Lizard:
-                                return 1.25m; //Win
-                            case SIGN.Spock:
-                                return 0.75m; //Loose
-                            default:
-                                return 0;
-                        }
-                    case SIGN.Lizard:
-                        switch (enemySign)
-                        {
-                            case SIGN.Rock:
-                                return 0.75m; //Loose
-                            case SIGN.Paper:
-                                return 1.25m; //Win
-                            case SIGN.Scissor:
-                                return 0.75m; //Loose
-                            case SIGN.Lizard:
-                                return 1.0m; //Draw
-                            case SIGN.Spock:
-                                return 1.25m; //Win
-                            default:
-                                return 0;
-                        }
-                    case SIGN.Spock:
-                        switch (enemySign)
-                        {
-                            case SIGN.Rock:
-                                return 1.25m; //Win 
-                            case SIGN.Paper:
-                                return 0.75m; //Loose
-                            case SIGN.Scissor:
-                                return 1.25m; //Win
-                            case SIGN.Lizard:
-                                return 0.75m; //Loose
-                            case SIGN.Spock:
-                                return 1.0m; //Draw
-                            default:
-                                return 0;
-                        }
-                    default:
-                        return 0;
-                }
+                    SIGN.Rock => enemySign switch
+                    {
+                        SIGN.Rock => 1.0m,//Draw
+                        SIGN.Paper => 0.75m,//Loose
+                        SIGN.Scissor => 1.25m,//Win
+                        SIGN.Lizard => 1.25m,//Win
+                        SIGN.Spock => 0.75m,//Loose
+                        _ => 0,
+                    },
+                    SIGN.Paper => enemySign switch
+                    {
+                        SIGN.Rock => 1.25m,//Win
+                        SIGN.Paper => 1.0m,//Draw
+                        SIGN.Scissor => 0.75m,//Loose
+                        SIGN.Lizard => 0.75m,//Loose
+                        SIGN.Spock => 1.25m,//Draw
+                        _ => 0,
+                    },
+                    SIGN.Scissor => enemySign switch
+                    {
+                        SIGN.Rock => 0.75m,//Loose
+                        SIGN.Paper => 1.25m,//Win
+                        SIGN.Scissor => 1.0m,//Draw
+                        SIGN.Lizard => 1.25m,//Win
+                        SIGN.Spock => 0.75m,//Loose
+                        _ => 0,
+                    },
+                    SIGN.Lizard => enemySign switch
+                    {
+                        SIGN.Rock => 0.75m,//Loose
+                        SIGN.Paper => 1.25m,//Win
+                        SIGN.Scissor => 0.75m,//Loose
+                        SIGN.Lizard => 1.0m,//Draw
+                        SIGN.Spock => 1.25m,//Win
+                        _ => 0,
+                    },
+                    SIGN.Spock => enemySign switch
+                    {
+                        SIGN.Rock => 1.25m,//Win 
+                        SIGN.Paper => 0.75m,//Loose
+                        SIGN.Scissor => 1.25m,//Win
+                        SIGN.Lizard => 0.75m,//Loose
+                        SIGN.Spock => 1.0m,//Draw
+                        _ => 0,
+                    },
+                    _ => 0,
+                };
             }
 
             public override string ToString()
@@ -299,73 +269,81 @@ namespace VRTSAttackTest
 
             public decimal LevelModifier(Mech enemy)
             {
-                if (Level == 1)
+                switch (Level)
                 {
-                    if (enemy.Level == 1)
+                    case 1:
+                        switch (enemy.Level)
+                        {
+                            case 1:
+                                return 1;
+                            case 2:
+                                return 0.85m;
+                            case 3:
+                                return 0.6m;
+                            case 4:
+                                return 0.5m;
+                            default:
+                                return 0.3m;
+                        }
+                    case 2:
+                        switch (enemy.Level)
+                        {
+                            case 1:
+                                return 1.15m;
+                            case 2:
+                                return 1m;
+                            case 3:
+                                return 0.85m;
+                            case 4:
+                                return 0.6m;
+                            default:
+                                return 0.5m;
+                        }
+                    case 3:
+                        switch (enemy.Level)
+                        {
+                            case 1:
+                                return 1.3m;
+                            case 2:
+                                return 1.15m;
+                            case 3:
+                                return 1m;
+                            case 4:
+                                return 0.85m;
+                            default:
+                                return 0.6m;
+                        }
+                    case 4:
+                        switch (enemy.Level)
+                        {
+                            case 1:
+                                return 1.5m;
+                            case 2:
+                                return 1.3m;
+                            case 3:
+                                return 1.15m;
+                            case 4:
+                                return 1m;
+                            default:
+                                return 0.85m;
+                        }
+                    case 5:
+                        switch (enemy.Level)
+                        {
+                            case 1:
+                                return 1.6m;
+                            case 2:
+                                return 1.5m;
+                            case 3:
+                                return 1.3m;
+                            case 4:
+                                return 1.15m;
+                            default:
+                                return 1m;
+                        }
+                    default:
                         return 1;
-                    else if (enemy.Level == 2)
-                        return 0.85m;
-                    else if (enemy.Level == 3)
-                        return 0.6m;
-                    else if (enemy.Level == 4)
-                        return 0.5m;
-                    else
-                        return 0.3m;
                 }
-                else if (Level == 2)
-                {
-                    if (enemy.Level == 1)
-                        return 1.15m;
-                    else if (enemy.Level == 2)
-                        return 1m;
-                    else if (enemy.Level == 3)
-                        return 0.85m;
-                    else if (enemy.Level == 4)
-                        return 0.6m;
-                    else
-                        return 0.5m;
-                }
-                else if (Level == 3)
-                {
-                    if (enemy.Level == 1)
-                        return 1.3m;
-                    else if (enemy.Level == 2)
-                        return 1.15m;
-                    else if (enemy.Level == 3)
-                        return 1m;
-                    else if (enemy.Level == 4)
-                        return 0.85m;
-                    else
-                        return 0.6m;
-                }
-                else if (Level == 4)
-                {
-                    if (enemy.Level == 1)
-                        return 1.5m;
-                    else if (enemy.Level == 2)
-                        return 1.3m;
-                    else if (enemy.Level == 3)
-                        return 1.15m;
-                    else if (enemy.Level == 4)
-                        return 1m;
-                    else
-                        return 0.85m;
-                }
-                else if (Level == 5)
-                {
-                    if (enemy.Level == 1)
-                        return 1.6m;
-                    else if (enemy.Level == 2)
-                        return 1.5m;
-                    else if (enemy.Level == 3)
-                        return 1.3m;
-                    else if (enemy.Level == 4)
-                        return 1.15m;
-                    else
-                        return 1m;
-                }
-                else
-                    return 1;
             }
 
             //ToString override to display needed info
@@ -374,6 +352,7 @@ namespace VRTSAttackTest
                 return string.Format("{0}\t|\t{1}\t|\t{2}\t|\t{3}", Name, MyElement.ToString(), HealthPoints, Level);
             }
 
+            #region Refactored Code
             /*
             public decimal LevelModifier(Mech enemy)
             {
@@ -466,6 +445,8 @@ namespace VRTSAttackTest
                         return 1;
                 }
             }*/
+
+            #endregion
         }
     }
 }
