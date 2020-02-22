@@ -12,23 +12,25 @@ namespace VRTSAttackTest
             Mech[] Players = new Mech[5];
             Mech[] Enemies = new Mech[5];
 
-            int[,] SignModifier = new int[5, 5]
+            float[,] SignModifier = new float[5, 5]
             {
-                { 1,1,1,1,1 },
-                { 1,1,1,1,1 },
-                { 1,1,1,1,1 },
-                { 1,1,1,1,1 },
-                { 1,1,1,1,1 }
+                { 1.0f,     1.25f,  0.85f,  1.25f,  0.85f },
+                { 0.85f,    1.0f,   1.25f,  1.25f,  0.85f },
+                { 1.25f,    0.85f,  1.0f,   0.85f,  1.25f },
+                { 1.25f,    0.85f,  1.25f,  1.0f,   0.85f },
+                { 0.85f,    1.25f,  1.25f,  0.85f,  1.0f    }
             };
 
-            int[,] LevelModifier = new int[5, 5]
+            float[,] LevelModifier = new float[5, 5]
             {
-                { 1,1,1,1,1 },
-                { 1,1,1,1,1 },
-                { 1,1,1,1,1 },
-                { 1,1,1,1,1 },
-                { 1,1,1,1,1 }
+                { 1.0f,     1.15f,  1.3f,   1.5f,   1.6f  },
+                { 0.85f,    1.0f,   1.15f,  1.3f,   1.5f  },
+                { 0.6f,     0.85f,  1.0f,   1.15f,  1.3f  },
+                { 0.5f,     0.6f,   0.85f,  1.0f,   1.15f },
+                { 0.3f,     0.5f,   0.6f,   0.85f,  1.0f  }
             };
+
+            //0.3f, 0.5f, 0.6f, 0.85f, 1.0f, 1.15f, 1.3f, 1.5f
 
             #region Refactor code
             //DisplayStatus(Players[0], Enemies);
@@ -55,7 +57,15 @@ namespace VRTSAttackTest
             */
             #endregion
 
+            float GetSignModifier(int AttackIndex, int DefendIndex)
+            {
+                return SignModifier[AttackIndex, DefendIndex];
+            }
 
+            float GetLevelModifier(int AttackIndex, int DefendIndex)
+            {
+                return LevelModifier[AttackIndex, DefendIndex];
+            }
 
             for (int i = 0; i < 5; i++)
             {
