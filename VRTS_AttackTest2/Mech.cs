@@ -31,14 +31,17 @@ namespace VRTS_AttackTest2
 
         public float GetSignModifier(int AttackIndex, int DefendIndex)
         {
-            return SignModifier[AttackIndex, DefendIndex];
+            //return SignModifier[AttackIndex, DefendIndex];
+            return SignModifier[DefendIndex, AttackIndex];
+
         }
 
         //BE AWARE: Level stores as non-zerio int 1-5
         //Index for array will be (Level - 1)
         public float GetLevelModifier(int AttackIndex, int DefendIndex)
         {
-            return LevelModifier[AttackIndex, DefendIndex];
+            //return LevelModifier[AttackIndex, DefendIndex];
+            return LevelModifier[DefendIndex, AttackIndex];
         }
     }
 }

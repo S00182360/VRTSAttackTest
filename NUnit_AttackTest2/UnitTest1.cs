@@ -28,12 +28,16 @@ namespace NUnit_AttackTest2
         [TestCase(1.6f, 4, 0)]
         [TestCase(1.3f, 4, 2)]
         [TestCase(1f, 4, 4)]
-        public void Test1(float LevelModifier, int AttackIndex, int DefendIndex)
+        public void TestLevelModifier(float LevelModifier, int AttackIndex, int DefendIndex)
         {
             Assert.AreEqual(LevelModifier, M1.GetLevelModifier(AttackIndex, DefendIndex));
         }
 
-
+        [TestCase(1f, SIGN.Rock, SIGN.Rock)]
+        [TestCase(0.85f, SIGN.Rock, SIGN.Paper)]
+        [TestCase(1.25f, SIGN.Rock, SIGN.Lizard)]
+        [TestCase(1f, SIGN.Rock, SIGN.Rock)]
+        [TestCase(1f, SIGN.Rock, SIGN.Rock)]
         public void TestSignModifier(float result, SIGN AttackSign, SIGN DefendSign)
         {
             Assert.AreEqual(result, M1.GetSignModifier((int)AttackSign, (int)DefendSign));

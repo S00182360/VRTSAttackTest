@@ -14,13 +14,13 @@ namespace VRTS_AttackTest2
 
         public static float[,] SignModifier = new float[5, 5]
         {
-                { 1.0f,     1.25f,  0.85f,  1.25f,  0.85f },
+                { 1.0f,     1.25f,  0.85f,  0.85f,  1.25f },
                 { 0.85f,    1.0f,   1.25f,  1.25f,  0.85f },
                 { 1.25f,    0.85f,  1.0f,   0.85f,  1.25f },
                 { 1.25f,    0.85f,  1.25f,  1.0f,   0.85f },
-                { 0.85f,    1.25f,  1.25f,  0.85f,  1.0f  }
+                { 0.85f,    1.25f,  0.85f,  1.25f,  1.0f  }
         };
-
+        //0.85
         public static float[,] LevelModifier = new float[5, 5]
         {
                 { 1.0f,     1.15f,  1.3f,   1.5f,   1.6f  },
@@ -30,8 +30,6 @@ namespace VRTS_AttackTest2
                 { 0.3f,     0.5f,   0.6f,   0.85f,  1.0f  }
         };
         //0.3f, 0.5f, 0.6f, 0.85f, 1.0f, 1.15f, 1.3f, 1.5f
-
-
         static void Main(string[] args)
         {
         }
