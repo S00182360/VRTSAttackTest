@@ -22,7 +22,7 @@ namespace VRTS_AttackTest2
             Name = name;
             MySign = mySign;
             HealthPoints = 100;
-            AttackPower = 5;
+            AttackPower = 1;
             IsEnemy = false;
             Level = level;
             AttackModifier = 1.0f;
@@ -42,6 +42,15 @@ namespace VRTS_AttackTest2
         {
             //return LevelModifier[AttackIndex, DefendIndex];
             return LevelModifier[DefendIndex, AttackIndex];
+        }
+
+
+        public float Attack(Mech me, Mech enemy)
+        {
+            me.AttackModifier = GetLevelModifier(me.Level - 1, enemy.Level - 1) * GetSignModifier((int)me.MySign, (int)enemy.MySign);
+            enemy.HealthPoints -= me.AttackPower * me.AttackModifier;
+            return enemy.HealthPoints;
+
         }
     }
 }

@@ -5,11 +5,24 @@ namespace NUnit_AttackTest2
 {
     public class Tests
     {
-        Mech M1;
+        public Mech P1;
+        Mech P2;
+        Mech P3;
+
+        Mech E1;
+        Mech E2;
+        Mech E3;
+
         [SetUp]
         public void Setup()
         {
-            M1 = new Mech("Player", SIGN.Rock, 1);
+            P1 = new Mech("Player_1", SIGN.Rock, 1);
+            P2 = new Mech("Player_2", SIGN.Paper, 3);
+            P3 = new Mech("Player_3", SIGN.Spock, 5);
+
+            E1 = new Mech("Enemy_1", SIGN.Scissor, 2);
+            E2 = new Mech("Enemy_2", SIGN.Lizard, 4);
+            E3 = new Mech("Enemy_3", SIGN.Rock, 1);
         }
 
 
@@ -30,7 +43,7 @@ namespace NUnit_AttackTest2
         [TestCase(1f, 4, 4)]
         public void TestLevelModifier(float LevelModifier, int AttackIndex, int DefendIndex)
         {
-            Assert.AreEqual(LevelModifier, M1.GetLevelModifier(AttackIndex, DefendIndex));
+            Assert.AreEqual(LevelModifier, P1.GetLevelModifier(AttackIndex, DefendIndex));
         }
 
 
@@ -59,7 +72,7 @@ namespace NUnit_AttackTest2
         [TestCase(0.85f, SIGN.Spock, SIGN.Paper)]
         public void TestSignModifier(float result, SIGN AttackSign, SIGN DefendSign)
         {
-            Assert.AreEqual(result, M1.GetSignModifier((int)AttackSign, (int)DefendSign));
+            Assert.AreEqual(result, P1.GetSignModifier((int)AttackSign, (int)DefendSign));
         }
     }
 }

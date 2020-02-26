@@ -32,6 +32,9 @@ namespace VRTS_AttackTest2
         //0.3f, 0.5f, 0.6f, 0.85f, 1.0f, 1.15f, 1.3f, 1.5f
         static void Main(string[] args)
         {
+            Mech Player = new Mech("Player", SIGN.Rock, 1);
+            Mech Enemy = new Mech("Enemy", SIGN.Rock, 1);
         }
+
     }
 }
